@@ -13,11 +13,11 @@ bool MoveToPosition(uint8_t positionNum);
 bool risen;
 
 int main() {
-    // This section attaches the interrupt callback to the homing sensor pin,
-    // set to trigger on any change of sensor state. (yellow button)
+    // this section attaches the interrupt callback to the homing sensor,
+    // trigger on any change of sensor state (yellow)
     HomingSensor.Mode(Connector::INPUT_DIGITAL);
     HomingSensor.InterruptHandlerSet(HomingSensorCallback, InputManager::CHANGE);
-    //Absolute Position mode
+    //absolute Position mode
     MotorMgr.MotorModeSet(MotorManager::MOTOR_ALL,
                           Connector::CPM_MODE_A_DIRECT_B_DIRECT);
 
@@ -26,11 +26,11 @@ int main() {
     motor.HlfbCarrier(MotorDriver::HLFB_CARRIER_482_HZ);
     
     motor.MotorInAState(false);
-    // Set input B to match the initial state of the sensor.
+    // set input B to match the initial state of the sensor.
     motor.MotorInBState(HomingSensor.State());
 //	Delay_ms(2000);
 //	MoveToPosition(1);
-    // Sets up serial communication and waits up to 5 seconds for a port to open
+    // serial communication output, 5 second timeout
     SerialPort.Mode(Connector::USB_CDC);
     SerialPort.Speed(baudRate);
     uint32_t timeout = 5000;
